@@ -64,11 +64,11 @@ const pushToTeam = () => {
       &ensp;&ensp;&ensp;
       <el-tag>桃花心木</el-tag>
     </div></el-menu-item>
-    <div class="flex-grow" />
+    <div class="flex-grow"/>
     <el-sub-menu index="2">
       <template #title>个人中心</template>
-      <el-menu-item index="2-1" @click="pushToAdd">查看我的个人信息</el-menu-item>
-      <el-menu-item index="2-2" @click="pushToShow">创建或加入团队</el-menu-item>
+      <el-menu-item index="2-1" @click="pushToAdd">创建和加入团队</el-menu-item>
+      <el-menu-item index="2-2" @click="pushToShow">查看我的个人信息</el-menu-item>
       <el-menu-item index="2-3" @click="pushToTeam">查看我的团队</el-menu-item>
     </el-sub-menu>
     <div class="button_div">
@@ -104,5 +104,6 @@ const pushToTeam = () => {
 
 .button {
   margin-top: 12px;
+  color:cadetblue;
 }
 </style>

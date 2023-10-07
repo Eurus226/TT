@@ -6,7 +6,8 @@ export interface userInfo {
 	username: string,
 	sex: string,
 	phone_num: string,
-	major: string
+	email: string,
+	teambelonging: string,
 }
 
 //新建联系人

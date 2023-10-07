@@ -1,64 +1,47 @@
 <template>
   <div class="div">
-    <el-table :data="tableData" height="500" style="width: 100%" border >
-      <el-table-column prop="name" label="姓名" width="80" align="center" show-overflow-tooltip />
-      <el-table-column prop="sex" label="性别" width="60" align="center" show-overflow-tooltip/>
-      <el-table-column prop="student_id" label="学号" width="120" align="center" show-overflow-tooltip/>
-      <el-table-column prop="phone_num" label="电话号码" width="150" align="center" show-overflow-tooltip/>
-      <el-table-column prop="major" label="专业" width="130" align="center" show-overflow-tooltip/>
-      <el-table-column prop="blacklist" label="黑名单" width="70" align="center" show-overflow-tooltip/>
-      <el-table-column label="操作" align="center">
-        <template #default="scope">
-            <el-button type="danger" @click="handleRowDelete(scope.$index)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+      <el-input v-model="input" disabled placeholder="昵称" />
+      <el-input v-model="input" disabled placeholder="账号" />
+      <el-input v-model="input" disabled placeholder="性别" />
+      <el-input v-model="input" disabled placeholder="手机号" />
+      <el-input v-model="input" disabled placeholder="邮箱" />
+</div>
+  <el-row class="demo-avatar demo-basic">
+    <el-col :span="12">
+      <div class="demo-basic--circle">
+        <!-- <div class="block">
+          <el-avatar :size="50" :src="circleUrl" />
+        </div> -->
+      </div>
+    </el-col>
+  </el-row>
+
 </template>
-
 <script lang="ts" setup>
-import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
-import {ref , onMounted, h} from "vue";
-import addService from "../apis/addService.ts";
-import userStore from "../stores/userStore.ts";
+// import userService from "../apis/userService.ts";
+// import userStore from "../stores/userStore.ts";
+// import { reactive, toRefs } from 'vue';
+import { ref } from 'vue';
 
-const newUserStore = userStore();
+const input = ref();
 
-onMounted(async () => {
-  const owner_id= newUserStore.userSession.id;
-  console.log(owner_id);
-  const res = await addService.show(owner_id);
+// const user = reactive({
+//   name: '',
+//   age: 0,
+// });
+// async  fetchUserInfo() {
+//   try {
+//     const response = await userService.getUserInfo();
+//     userStore.setUserInfo(response.data);
+//     user.name = response.data.name;
+//     user.age = response.data.age;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// const userRefs = toRefs(user);
 
-  if (res.data.code === 200 && res.data.msg === "OK") {
-    tableData.value = res.data.data.contact_list;
-  }
-  else if (res.data.code === 200501 && res.data.msg === "参数错误") {
-    ElNotification({
-      title: "失败",
-      message: h("i", { style: "color: teal" }, "参数错误！"),
-    });
-  }
-  else if (res.data.code === 200506 && res.data.msg === "联系人列表为空") {
-    ElNotification({
-      title: "提示",
-      message: h("i", { style: "color: teal" }, "联系人为空！"),
-    });
-  }
-  else {
-    ElNotification({
-      title: "失败",
-      message: h("i", { style: "color: teal" }, "网络错误！"),
-    });
-  }
-});
-
-const tableData = ref([
-
-]);
-
-const handleRowDelete = (index:number) => {
-  tableData.value.splice(index, 1);
-};
+// const { circleUrl,} = toRefs(state);
 </script>
 
 <style scoped>
@@ -66,5 +49,12 @@ const handleRowDelete = (index:number) => {
     width: 700px;
     height: 300px;
     margin: 50px -20px 0 auto;
+  /* .demo-basic {
+  text-align: center;
+} */
   }
 </style>
+
+
+
+

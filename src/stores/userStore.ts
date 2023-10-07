@@ -10,7 +10,7 @@ const userStore = defineStore(
 			username: "未登录",
 			sex: "未登录",
 			phone_num: "未登录",
-			major: "未登录",
+			teambelonging:"未登录",
 		});
 
 		const setUserInfo = (info: userInfo) : void => {
@@ -19,7 +19,7 @@ const userStore = defineStore(
 			userSession.sex = info.sex;
 			userSession.phone_num = info.phone_num;
 			userSession.email = info.email;
-			userSession.major = info.major;
+			userSession.teambeloging = info.teambelonging;
 		};
 
 		return {

@@ -55,7 +55,7 @@ const login = async () => {
 
   const res = await userService.login(loginInfo.value);
 
-if (res.data.msg === "OK" && res.data.code === 200) {
+if (res.data.msg === "Lorem" && res.data.code === 200) {
   const responseData = res.data.data;
   const message = "亲爱的" + responseData.username + ",欢迎回来！";
   ElNotification({
@@ -72,7 +72,8 @@ if (res.data.msg === "OK" && res.data.code === 200) {
     username: responseData.username,
     sex: responseData.sex,
     phone_num: responseData.phone_num,
-    major: responseData.major
+    email: responseData.email,
+    teambelonging:responseData.teambelonging,
   });
   router.push("/Add");
 

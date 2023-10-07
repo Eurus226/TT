@@ -1,9 +1,7 @@
 import { h } from "vue";
 import {createRouter , createWebHistory } from "vue-router";
 import Login from "../pages/Login.vue";
-import Add from "../pages/Add.vue";
 import Show from "../pages/Show.vue";
-import Empty from "../pages/Empty.vue";
 import Team from "../pages/Team.vue";
 // 分析原因：因为在main.ts中，注册router总比pinia先，所以不能使用到store/index.js文件中createPinia方法，只能在router文件中再createPinia一次，才能使用到pinia。
 import Sign from "../pages/Sign.vue";
@@ -23,11 +21,6 @@ const routes = [
 		path: "/Sign" ,
 		name: "Sign" ,
 		component: Sign
-	},
-	{
-		path: "/Add" ,
-		name: "Add" ,
-		component: Add
 	},
 	{
 		path: "/Show" ,

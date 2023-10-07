@@ -1,30 +1,18 @@
 <script setup lang="ts">
-import showContacts from "../components/personalInformation.vue";
+import personalInformation from "../components/personalInformation.vue";
 </script>
 
 <template>
-  <el-container>
-    <el-col :span="8">
-      <div>
-        <el-image class="img" src="src/assets/Add.png">
-        </el-image>
-      </div>
-    </el-col>
-    <el-col :span="16">
-      <showContacts />
-    </el-col>
-  </el-container>
+ <div class="title">
+  <h2>我的个人信息</h2></div>
+  <el-col :span="16">
+      <personalInformation></personalInformation>
+ </el-col>
 </template>
 
 <style scoped>
-.img {
-  position: relative;
-  left: 60px;
-  top: -50px;
+.title{
+  margin-bottom: 1000px;
 }
-@media (max-width: 1010px) {
-  .img {
-    display: none;
-  }
-}
+
 </style>

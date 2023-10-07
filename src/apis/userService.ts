@@ -5,7 +5,8 @@ export default class userService {
 	static async login(database: {
 		phone_num: string,
 		password: string,
-		administratordata: boolean;
+		administratordata: boolean,
+		teambelonging: string;
 	}) {
 		return request({
 			"headers": {
