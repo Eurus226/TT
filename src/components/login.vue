@@ -49,13 +49,13 @@ const login = async () => {
   }
 
   const loginInfo = ref({
-    phone_num: input.value,
+    account: input.value,
     password: password.value,
   });
 
   const res = await userService.login(loginInfo.value);
 
-if (res.data.msg === "Lorem" && res.data.code === 200) {
+if (res.data.msg === "OK" && res.data.code === 200) {
   const responseData = res.data.data;
   const message = "亲爱的" + responseData.username + ",欢迎回来！";
   ElNotification({
@@ -99,10 +99,10 @@ const clear = () => {
   input.value = "";
   password.value = "";
 };
-const administratordata = ref(false);
-const administratorVerify = () => {
-    administratordata.value = true;
-};
+// const administratordata = ref(false);
+// const administratorVerify = () => {
+//     administratordata.value = true;
+// };
 
 </script>
 

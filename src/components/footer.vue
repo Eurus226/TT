@@ -1,7 +1,7 @@
 <template>
   <div class="foot_div">
     <div>
-      <el-divider content-position="center">@桃花心木</el-divider>
+      <el-divider content-position="center">@ddl战士</el-divider>
     </div>
     <div class="content">
       <el-descriptions :column="5" size="small" >

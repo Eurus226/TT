@@ -21,11 +21,12 @@ const onSubmit = async () => {
         title: "失败",
         message: h("i", { style: "color: teal" }, "两次输入的密码不一致,请重新输入！"),
       });
+      return;
     }
 
     const res = await userService.sign(form);
 
-    if (res.data.code === 200 && res.data.msg === "OK") {
+    if (res.data.code === 200 && res.data.message === "success") {
       console.log(form);
       ElNotification({
         title: "成功",
@@ -39,10 +40,10 @@ const onSubmit = async () => {
         message: h("i", { style: "color: teal" }, "参数错误！"),
       });
     }
-    else if (res.data.code === 200504 && res.data.msg === "手机号已注册") {
+    else if (res.data.code === 400 && res.data.msg === "手机号已经被绑定") {
       ElNotification({
         title: "失败",
-        message: h("i", { style: "color: teal" }, "手机号已注册！"),
+        message: h("i", { style: "color: teal" }, "手机号已经被绑定！"),
       });
     }
     else {
@@ -60,7 +61,8 @@ const onSubmit = async () => {
   }
 };
 
-const clear = () => {
+const clear = () => { 
+      form.name="";
       form.username= "";
       form.sex= "";
       form.phone_num= "";

@@ -6,10 +6,11 @@ const userStore = defineStore(
 	"user",
 	() => {
 		const userSession = reactive({
-			id: -1,
+			account:"未登录",
 			username: "未登录",
 			sex: "未登录",
 			phone_num: "未登录",
+			email:"未登录",
 			teambelonging:"未登录",
 		});
 
@@ -19,7 +20,7 @@ const userStore = defineStore(
 			userSession.sex = info.sex;
 			userSession.phone_num = info.phone_num;
 			userSession.email = info.email;
-			userSession.teambeloging = info.teambelonging;
+			userSession.teambelonging = info.teambelonging;
 		};
 
 		return {

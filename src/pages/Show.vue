@@ -12,7 +12,7 @@ import personalInformation from "../components/personalInformation.vue";
 
 <style scoped>
 .title{
-  margin-bottom: 1000px;
+  margin-bottom: 640px;
 }
 
 </style>
