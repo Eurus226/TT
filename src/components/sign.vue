@@ -2,21 +2,21 @@
 import { reactive , h } from "vue";
 import { ElNotification } from "element-plus";
 import userService from "../apis/userService.ts";
-import router from "../routers";
+import router from "../router";
 
 const form = reactive({
-  name:"",
-  username: "",
-  sex: "",
-  phone_num: "",
+  user_name:"",
+  account: "",
+  // sex: 0,
+  phonenumber: "",
   email:"",
   password: "",
-  confirm_password: "",
+  repassword: "",
 });
 
 const onSubmit = async () => {
-  if (form.username !== "" && form.phone_num !== "" && form.password !== "" && form.password !== "") {
-    if (form.password !== form.confirm_password) {
+  if (form.user_name !== "" && form.phonenumber !== "" && form.password !== "" && form.repassword !== "") {
+    if (form.password !== form.repassword) {
       ElNotification({
         title: "失败",
         message: h("i", { style: "color: teal" }, "两次输入的密码不一致,请重新输入！"),
@@ -40,16 +40,63 @@ const onSubmit = async () => {
         message: h("i", { style: "color: teal" }, "参数错误！"),
       });
     }
-    else if (res.data.code === 400 && res.data.msg === "手机号已经被绑定") {
+    else if (res.data.code === 6) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "账号已经被注册！"),
+      });
+    }
+    else if (res.data.code === 7) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "该用户名已经被使用！"),
+      });
+    }
+    else if (res.data.code === 9) {
       ElNotification({
         title: "失败",
         message: h("i", { style: "color: teal" }, "手机号已经被绑定！"),
       });
     }
-    else {
+    else if (res.data.code === 8) {
       ElNotification({
         title: "失败",
-        message: h("i", { style: "color: teal" }, "注册失败，请检查网络！"),
+        message: h("i", { style: "color: teal" }, "邮箱已经被绑定！"),
+      });
+    }
+    else if (res.data.code === 2) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "邮箱格式不正确！"),
+      });
+    }
+    else if (res.data.code === 3) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "手机号格式不正确！"),
+      });
+    }
+    else if (res.data.code === 1) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "账号只能由数字组成！"),
+      });
+    }
+    else if (res.data.code === 1) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "密码长度小于8位!"),
+      });
+    }
+    else if (res.data.code === 5) {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "密码需同时包含大写字母、小写字母和数字,并且不能包含空格！"),
+      });
+    }else {
+      ElNotification({
+        title: "失败",
+        message: h("i", { style: "color: teal" }, "注册失败"),
       });
     }
   }
@@ -62,13 +109,13 @@ const onSubmit = async () => {
 };
 
 const clear = () => { 
-      form.name="";
-      form.username= "";
-      form.sex= "";
-      form.phone_num= "";
+      form.user_name="";
+      form.account= "";
+      //form.sex= 0;
+      form.phonenumber= "";
       form.email="";
       form.password= "";
-      form.confirm_password= "";
+      form.repassword= "";
 };
 </script>
 
@@ -79,28 +126,28 @@ const clear = () => {
     </div>
     <el-form :model="form" label-width="120px" >
       <el-form-item label="昵称">
-        <el-input v-model="form.name" />
+        <el-input v-model="form.user_name" />
       </el-form-item>
       <el-form-item label="账号">
-        <el-input v-model="form.username" />
+        <el-input v-model="form.account" placeholder="账号只能由数字组成"/>
       </el-form-item>
-      <el-form-item label="性别">
+      <!-- <el-form-item label="性别">
         <el-select v-model="form.sex" placeholder="请选择您的性别">
-          <el-option label="男" value= "男" />
-          <el-option label="女" value= "女" />
+          <el-option label="男" value= "1" />
+          <el-option label="女" value= "2" />
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="电话号码">
-        <el-input v-model="form.phone_num" />
+        <el-input v-model="form.phonenumber" placeholder="请输入完整11位手机号"/>
       </el-form-item>
       <el-form-item label="邮箱地址">
         <el-input v-model="form.email" type="text" />
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="form.password" placeholder="请输入8-10位密码,必须包含字母"/>
+        <el-input v-model="form.password" placeholder="密码长度应大于8位,必须包含大小写字母"/>
       </el-form-item>
       <el-form-item label="确认密码">
-        <el-input v-model="form.confirm_password" placeholder="请输入8-10位密码,必须包含字母"/>
+        <el-input v-model="form.repassword" placeholder="密码长度应大于8位,必须包含大小写字母"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit" class="button">注册</el-button>

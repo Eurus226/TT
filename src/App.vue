@@ -1,21 +1,8 @@
-<script setup lang="ts">
-  import { RouterView } from "vue-router";
-  import myHeader from "./components/header.vue";
-  import myFooter from "./components/footer.vue";
-</script>
-
 <template>
-  <el-container>
-    <el-header>
-      <my-header></my-header>
-    </el-header>
+  <div class="app">
     <router-view />
-    <el-footer>
-      <my-footer ></my-footer>
-    </el-footer>
-  </el-container>
+  </div>
 </template>
-
-<style scoped>
-
+<style>
+  @import './style/common.scss';
 </style>

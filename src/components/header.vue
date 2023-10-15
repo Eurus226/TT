@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import router from "../routers";
+import router from "../router";
 import userStore from "../stores/userStore.ts";
 import loginStore from "../stores/loginStore.ts";
 import {storeToRefs} from "pinia";

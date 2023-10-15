@@ -1,20 +1,27 @@
-// Purpose: Export the IdentityInfo interface.
-
 //store中存的个人信息
 export interface userInfo {
 	account:string,
-	username: string,
-	sex: string,
-	phone_num: string,
+	user_name: string,
+	// sex: number,
+	phonenumber: string,
 	email: string,
-	teambelonging: string,
+	password: string,
 }
 
 
 export interface signInfo {
-	confirm_password: string;
+	repassword: string;
 	password: string;
-	phone_num: string;
-	sex: string;
-	username: string;
+	phonenumber: string;
+	// sex: number;
+	user_name: string;
+	email: string;
+}
+
+export interface userInfo_ {
+	account:string,
+	user_name: string,
+	phonenumber: string,
+	email: string,
+	teambelonging: string,
 }

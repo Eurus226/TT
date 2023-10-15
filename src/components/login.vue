@@ -20,19 +20,19 @@
     </el-container>
     <br />
     <el-button type="primary" @click="login" class="button">登录</el-button>
-    <el-button @click="clear" class="button">清空</el-button>
+    <el-button @click="sign" class="button">注册</el-button>
     <el-button @click="administratorVerify" class="button">管理员登录</el-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref , h } from "vue";
+import { ref , h, pushScopeId } from "vue";
 import userService from "../apis/userService.ts";
 import loginStore from "../stores/loginStore.ts";
 import userStore from "../stores/userStore.ts";
 import {ElNotification} from "element-plus";
-import router from "../routers";
-import administratorStore from "../stores/administratorStore.ts";
+import router from "../router";
+// import administratorStore from "../stores/administratorStore.ts";
 
 const input = ref("");
 const password = ref("");
@@ -54,10 +54,10 @@ const login = async () => {
   });
 
   const res = await userService.login(loginInfo.value);
-
-if (res.data.msg === "OK" && res.data.code === 200) {
+console.log(res);
+if (res.data.msg === "success!" && res.data.code === 200) {
   const responseData = res.data.data;
-  const message = "亲爱的" + responseData.username + ",欢迎回来！";
+  const message = "hi!亲爱的" + responseData.user_name + ",欢迎回来！";
   ElNotification({
     title: "登陆成功！",
     message: h("i", { style: "color: teal" }, message),
@@ -66,43 +66,41 @@ if (res.data.msg === "OK" && res.data.code === 200) {
   newLoginStore.setLogin(true);
   console.log("登录状态"+newLoginStore.loginSession);
   localStorage.setItem("login", String(true));
-  localStorage.setItem("name", String(responseData.username));
+  localStorage.setItem("name", String(responseData.user_name));
   newUserStore.setUserInfo({
-    id: responseData.id,
-    username: responseData.username,
-    sex: responseData.sex,
-    phone_num: responseData.phone_num,
+    account: responseData.account,
+    user_name: responseData.user_name,
+    // sex: responseData.sex,
+    phonenumber: responseData.phonenumber,
     email: responseData.email,
-    teambelonging:responseData.teambelonging,
+    password: responseData.password,
   });
-  router.push("/Add");
-
-
+  console.log("你好");
+  router.push('/home');
 }
-else if (res.data.msg === "参数错误" && res.data.code === 200501) {
+else if (res.data.msg === "密码错误!" && res.data.code === 2) {
   ElNotification({
     title: "登陆失败！",
-    message: h("i", { style: "color: teal" }, "参数错误"),
+    message: h("i", { style: "color: teal" }, "密码错误!"),
   });
   return;
 }
-else if (res.data.msg === "用户不存在" && res.data.code === 200502) {
+else if (res.data.msg === "用户不存在!" && res.data.code === 4) {
   ElNotification({
     title: "登陆失败！",
-    message: h("i", { style: "color: teal" }, "用户不存在"),
+    message: h("i", { style: "color: teal" },"用户不存在!"),
   });
   return;
 }
 
 };
-const clear = () => {
-  input.value = "";
-  password.value = "";
+const sign = () => {
+  router.push("/Sign");
 };
-// const administratordata = ref(false);
-// const administratorVerify = () => {
-//     administratordata.value = true;
-// };
+const administratordata = ref(false);
+const administratorVerify = () => {
+    administratordata.value = true;
+};
 
 </script>
 

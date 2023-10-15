@@ -12,7 +12,8 @@ import personalInformation from "../components/personalInformation.vue";
 
 <style scoped>
 .title{
-  margin-bottom: 640px;
+  margin-bottom: 660px;
+  color: pink;
 }
 
 </style>
